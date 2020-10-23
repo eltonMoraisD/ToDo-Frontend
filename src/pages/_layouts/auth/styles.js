@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   position: absolute;
   width: 457px;
-  height: 343px;
+
   background: rgba(255, 255, 255, 0.09);
   mix-blend-mode: normal;
   border-radius: 8px;
@@ -47,17 +47,25 @@ export const Content = styled.div`
       padding: 0 15px;
       border-radius: 4px;
       border: 0;
-      margin: 0 0 15px;
-      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      margin: 0 0 13px;
       line-height: 13px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     }
+
+    span {
+      color: red;
+      align-self: flex-start;
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+
     button {
       width: 313px;
       height: 44px;
       padding: 0 15px;
       border-radius: 4px;
       border: 0;
-      margin: 0 0 15px;
+      margin: 0 0 13px;
       background: #452e97;
       color: white;
       font-weight: bold;
