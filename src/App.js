@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { Router, BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import './config/ReactotronConfig';
@@ -16,7 +16,9 @@ function App() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <Routes />
+        <Switch>
+          <Routes />
+        </Switch>
         <GlobalStyle />
       </Router>
     </Provider>
