@@ -17,7 +17,7 @@ export default function Routes() {
         <Route path="/update-user" component={UpdateUser} isPrivate></Route>
 
         {/* Se a rota não existir retornar um 404 */}
-        <Route path="/" component={() => <h1>404</h1>}></Route>
+        <Route path="*" component={() => <h1>404</h1>}></Route>
       </Switch>
     </BrowserRouter>
   );
