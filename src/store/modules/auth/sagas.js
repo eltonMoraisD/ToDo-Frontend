@@ -1,4 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import api from '../../../services/api';
 
 import { signInSuccess, signFailure } from './actions';
@@ -16,14 +17,10 @@ export function* login({ payload }) {
 
     const { token, user } = response.data;
 
-    if (!token) {
-      console.tron.log('Usuario não identificado');
-      return;
-    }
-
     yield put(signInSuccess(token, user));
     history.push('/todo-list');
   } catch (error) {
+    toast.error('Falha na autenticação, verifique seus dados');
     yield put(signFailure());
   }
 }
