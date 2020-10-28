@@ -25,4 +25,22 @@ export function* login({ payload }) {
   }
 }
 
-export default all([takeLatest('@auth/SIGN_IN_REQUEST', login)]);
+export function* register({ payload }) {
+  try {
+    const { name, email, password } = payload;
+    yield call(api.post, '/auth/register', {
+      name,
+      email,
+      password,
+    });
+    history.back('/');
+  } catch (err) {
+    toast.error('Falha no cadastro, verifique seus dados');
+    yield put(signFailure());
+  }
+}
+
+export default all([
+  takeLatest('@auth/SIGN_IN_REQUEST', login),
+  takeLatest('@auth/SIGN_UP_REQUEST', register),
+]);
