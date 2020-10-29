@@ -15,7 +15,6 @@ function UpdateUser() {
         <Button type="submit" primary>
           Update Perfil
         </Button>
-        <Button type="submit">Sair</Button>
       </Form>
     </Container>
   );

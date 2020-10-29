@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { signOut } from '../../store/modules/auth/actions';
 
 import { Container, Content, Profile } from './styles';
 
 import TodoLogo from '../../assets/TodoLogo.svg';
-import userImg from '../../assets/usuarioTodo.svg';
+import logOutButton from '../../assets/logOut.svg';
 
 function Header() {
+  const dispatch = useDispatch();
+  function handleSignOut() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
       <Content>
@@ -22,9 +30,9 @@ function Header() {
               <strong>Elton</strong>
               <Link to="/update-user">Meu Perfil</Link>
             </div>
-            <Link to="/update-user">
-              <img src={userImg} alt="nome do usuario" />
-            </Link>
+            <a onClick={handleSignOut}>
+              <img src={logOutButton} alt="Botão sair" />
+            </a>
           </Profile>
         </aside>
       </Content>

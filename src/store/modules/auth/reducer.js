@@ -18,6 +18,12 @@ export default function auth(state = INITIAL_STATE, action) {
         drafState.loading = false;
       });
 
+    case '@auth/SIGN_OUT':
+      return produce(state, (drafState) => {
+        drafState.token = null;
+        drafState.signed = false;
+      });
+
     case '@auth/SIGN_FAILURE':
       return produce(state, (drafState) => {
         drafState.loading = false;

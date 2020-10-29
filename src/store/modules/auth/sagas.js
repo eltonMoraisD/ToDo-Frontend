@@ -40,7 +40,12 @@ export function* register({ payload }) {
   }
 }
 
+export function sair() {
+  history.back('/');
+}
+
 export default all([
   takeLatest('@auth/SIGN_IN_REQUEST', login),
   takeLatest('@auth/SIGN_UP_REQUEST', register),
+  takeLatest('@auth/SIGN_OUT', sair),
 ]);

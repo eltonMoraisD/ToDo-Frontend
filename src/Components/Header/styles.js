@@ -6,6 +6,7 @@ export const Container = styled.div`
   padding: 0 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
+
 export const Content = styled.div`
   height: 64px;
   max-height: 900px;
@@ -23,8 +24,22 @@ export const Content = styled.div`
   aside {
     display: flex;
     align-items: center;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6px;
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      img {
+        width: 25px;
+        height: 25px;
+        margin-left: 10px;
+      }
+    }
   }
 `;
+
 export const Profile = styled.div`
   display: flex;
   margin-left: 20px;

@@ -22,6 +22,7 @@ export default function Login() {
   function handleSubmit({ email, password }) {
     dispatch(signInRequest(email, password));
   }
+
   return (
     <>
       <h1>Login</h1>
