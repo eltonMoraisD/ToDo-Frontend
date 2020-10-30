@@ -33,7 +33,7 @@ export default function Login() {
 
         <button type="submit">
           {loading ? (
-            <ReactLoading type={'spokes'} height={20} width={20} />
+            <ReactLoading type={'spinningBubbles'} height={20} width={20} />
           ) : (
             'Login'
           )}

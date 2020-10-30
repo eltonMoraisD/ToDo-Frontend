@@ -30,9 +30,9 @@ function Header() {
               <strong>Elton</strong>
               <Link to="/update-user">Meu Perfil</Link>
             </div>
-            <a onClick={handleSignOut}>
+            <Link to="/" onClick={handleSignOut}>
               <img src={logOutButton} alt="Botão sair" />
-            </a>
+            </Link>
           </Profile>
         </aside>
       </Content>

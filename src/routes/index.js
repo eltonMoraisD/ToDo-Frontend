@@ -1,13 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Route from './Route';
 
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Todo from '../pages/Todo';
 import UpdateUser from '../pages/UpdateUser';
-
-import history from '../services/history';
 
 export default function Routes() {
   return (
@@ -18,7 +16,7 @@ export default function Routes() {
       <Route path="/update-user" component={UpdateUser} isPrivate></Route>
 
       {/* Se a rota não existir retornar um 404 */}
-      <Route path="*" component={() => <h1>404</h1>}></Route>
+      {/* <Route path="/" component={() => <h1>404</h1>}></Route> */}
     </BrowserRouter>
   );
 }
