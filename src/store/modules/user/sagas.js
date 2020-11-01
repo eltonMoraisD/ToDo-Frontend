@@ -17,7 +17,6 @@ export function* updateProfile({ payload }) {
       { name, email },
       rest.oldPassword ? rest : {}
     );
-    console.tron.log('profile ' + profile);
 
     const response = yield call(api.put, '/auth/user-update', profile, {
       headers: {

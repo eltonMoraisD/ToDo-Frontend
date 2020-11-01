@@ -25,7 +25,7 @@ function App() {
           </Switch>
         </Router>
         <GlobalStyle />
-        <ToastContainer autoClose={4000} />
+        <ToastContainer autoClose={3000} />
       </PersistGate>
     </Provider>
   );

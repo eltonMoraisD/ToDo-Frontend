@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { signOut } from '../../store/modules/auth/actions';
 
@@ -10,6 +10,7 @@ import TodoLogo from '../../assets/TodoLogo.svg';
 import logOutButton from '../../assets/logOut.svg';
 
 function Header() {
+  const profile = useSelector((state) => state.user.profile);
   const dispatch = useDispatch();
   function handleSignOut() {
     dispatch(signOut());
@@ -27,7 +28,7 @@ function Header() {
         <aside>
           <Profile>
             <div>
-              <strong>Elton</strong>
+              <strong>{profile.name}</strong>
               <Link to="/update-user">Meu Perfil</Link>
             </div>
             <Link to="/" onClick={handleSignOut}>

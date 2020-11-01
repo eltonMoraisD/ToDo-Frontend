@@ -1,97 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
+import { useDispatch } from 'react-redux';
 
 import logoTodo from '../../assets/LogoPageTodo.svg';
 import addButton from '../../assets/addButton.svg';
 import updateTodo from '../../assets/updateTodoIcon.svg';
 import removeTodo from '../../assets/removeTodoIcon.svg';
 
+import { todoRequest } from '../../store/modules/todo/actions';
+
+import api from '../../services/api';
+
 import { Container, CardContainer, Card } from './styles';
 
+import { store } from '../../store';
+
 function Todo() {
+  const dispatch = useDispatch();
+
   function handleSubmit(data) {
-    console.tron.log(data);
+    dispatch(todoRequest(data.text));
   }
 
+  const [stateTodo, setTodo] = useState([]);
+
+  useEffect(() => {
+    async function loadTodos() {
+      const token = store.getState().auth.token;
+      const response = await api.get('/user/todos', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      });
+      setTodo(response.data);
+    }
+    loadTodos();
+  }, [stateTodo]);
   return (
     <>
       <Container>
         <img src={logoTodo} alt="Todo Logo" />
 
         <Form onSubmit={handleSubmit}>
-          <Input name="text" type="textarea"></Input>
+          <Input name="text" type="text" placeholder="Criar to-do"></Input>
           <button type="submit">
-            <img src={addButton} alt="adicionar todo" />
+            <img src={addButton} alt="botão adicionar todo" />
           </button>
         </Form>
 
         <CardContainer>
-          <Card>
-            <p>Dar manutenção no portatil ir ao cinema</p>
-            <span>
-              <button>
-                <img src={updateTodo} alt="update todo" />
-              </button>
-              <button>
-                <img src={removeTodo} alt="remove todo" />
-              </button>
-            </span>
-          </Card>
-          <Card>
-            <p>Atualizar a versão do linux para 20.6</p>
-            <span>
-              <button>
-                <img src={updateTodo} alt="update todo" />
-              </button>
-              <button>
-                <img src={removeTodo} alt="remove todo" />
-              </button>
-            </span>
-          </Card>
-          <Card>
-            <p>Estudar NodeJs e ReactJs , React Native </p>
-            <span>
-              <button>
-                <img src={updateTodo} alt="update todo" />
-              </button>
-              <button>
-                <img src={removeTodo} alt="remove todo" />
-              </button>
-            </span>
-          </Card>
-          <Card>
-            <p>Comprar mouse e teclado sem fio</p>
-            <span>
-              <button>
-                <img src={updateTodo} alt="update todo" />
-              </button>
-              <button>
-                <img src={removeTodo} alt="remove todo" />
-              </button>
-            </span>
-          </Card>
-          <Card>
-            <p>Corrigir erro no app Todo</p>
-            <span>
-              <button>
-                <img src={updateTodo} alt="update todo" />
-              </button>
-              <button>
-                <img src={removeTodo} alt="remove todo" />
-              </button>
-            </span>
-          </Card>
-          <Card>
-            <p>Adicionar modo noite ao app ToDo</p>
-            <span>
-              <button>
-                <img src={updateTodo} alt="update todo" />
-              </button>
-              <button>
-                <img src={removeTodo} alt="remove todo" />
-              </button>
-            </span>
-          </Card>
+          {stateTodo.map((todo) => (
+            <Card key={todo._id}>
+              <p>{todo.description}</p>
+              <span>
+                <button>
+                  <img src={updateTodo} alt="update todo" />
+                </button>
+                <button>
+                  <img src={removeTodo} alt="remove todo" />
+                </button>
+              </span>
+            </Card>
+          ))}
         </CardContainer>
       </Container>
     </>
