@@ -17,3 +17,15 @@ export function todoFailure() {
     type: '@todo/TODO_FAILURE',
   };
 }
+
+export function getTodoRequest() {
+  return {
+    type: '@tdo/GET_TODO_REQUEST',
+  };
+}
+
+export function getTodoFailure() {
+  return {
+    type: '@todo/GET_TODO_FAIL',
+  };
+}

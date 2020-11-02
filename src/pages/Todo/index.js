@@ -23,7 +23,6 @@ function Todo() {
   }
 
   const [stateTodo, setTodo] = useState([]);
-
   useEffect(() => {
     async function loadTodos() {
       const token = store.getState().auth.token;
@@ -35,8 +34,25 @@ function Todo() {
       });
       setTodo(response.data);
     }
+
     loadTodos();
   }, [stateTodo]);
+
+  const handleDelete = (id) => {
+    const token = store.getState().auth.token;
+
+    async function deleteTodo() {
+      await api.delete(`/user/delete-todos/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      });
+    }
+
+    deleteTodo();
+  };
+
   return (
     <>
       <Container>
@@ -57,7 +73,7 @@ function Todo() {
                 <button>
                   <img src={updateTodo} alt="update todo" />
                 </button>
-                <button>
+                <button onClick={() => handleDelete(todo._id)}>
                   <img src={removeTodo} alt="remove todo" />
                 </button>
               </span>
