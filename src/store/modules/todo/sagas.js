@@ -10,7 +10,6 @@ export function* createTodo({ payload }) {
 
   try {
     const todo = payload.data;
-    console.tron.log('todo saga ' + todo);
 
     const response = yield call(
       api.post,

@@ -13,14 +13,19 @@ function UpdateUser() {
     console.tron.log('index ' + data);
     dispatch(updateProfileRequest(data));
   }
+
   return (
     <Container>
       <Form initialData={profile} onSubmit={handleSubmit}>
         <h1>Perfil</h1>
-        <Input name="name" type="text" placeholder="Name" />
+        <Input name="name" type="text" placeholder="Nome completo" />
         <Input name="email" type="email" placeholder="E-mail" />
-        <Input name="oldPassword" type="password" placeholder="Old Password" />
-        <Input name="password" type="password" placeholder="New Password" />
+        <Input
+          name="oldPassword"
+          type="password"
+          placeholder="Password antigo"
+        />
+        <Input name="password" type="password" placeholder="Novo Password" />
         <Button type="submit" primary>
           Atualizar Perfil
         </Button>

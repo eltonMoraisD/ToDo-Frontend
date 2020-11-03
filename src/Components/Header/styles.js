@@ -27,10 +27,10 @@ export const Content = styled.div`
 
     a {
       display: flex;
+      /* border-left: 1px solid rgba(0, 0, 0, 0.1); */
       justify-content: center;
       align-items: center;
       margin-top: 6px;
-      border-left: 1px solid rgba(0, 0, 0, 0.1);
       img {
         width: 25px;
         height: 25px;

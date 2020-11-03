@@ -26,7 +26,7 @@ function Register() {
     <>
       <h1>Criar conta</h1>
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="name" type="text" placeholder="Name" />
+        <Input name="name" type="text" placeholder="Nome Completo" />
         <Input name="email" type="email" placeholder="E-mail" />
         <Input name="password" type="password" placeholder="Password" />
         <button type="submit">Registrar</button>

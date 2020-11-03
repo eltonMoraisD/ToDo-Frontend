@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import logoTodo from '../../assets/LogoPageTodo.svg';
 import addButton from '../../assets/addButton.svg';
@@ -15,14 +16,16 @@ import { Container, CardContainer, Card } from './styles';
 
 import { store } from '../../store';
 
-function Todo() {
+import Modal from '../Modal';
+
+function Todo(props) {
   const dispatch = useDispatch();
+  const [stateTodo, setTodo] = useState([]);
 
   function handleSubmit(data) {
     dispatch(todoRequest(data.text));
   }
 
-  const [stateTodo, setTodo] = useState([]);
   useEffect(() => {
     async function loadTodos() {
       const token = store.getState().auth.token;
@@ -42,15 +45,34 @@ function Todo() {
     const token = store.getState().auth.token;
 
     async function deleteTodo() {
-      await api.delete(`/user/delete-todos/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        },
-      });
+      try {
+        await api.delete(`/user/delete-todos/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+        });
+        toast.success('Todo Deletado');
+      } catch (error) {
+        toast.error('Falha ao deletar todo');
+      }
     }
 
     deleteTodo();
+  };
+
+  const [state, setState] = useState({ show: false });
+
+  const showModal = (id) => {
+    setState({
+      show: {
+        [id]: true,
+      },
+    });
+  };
+
+  const hideModal = () => {
+    setState({ show: false });
   };
 
   return (
@@ -59,7 +81,12 @@ function Todo() {
         <img src={logoTodo} alt="Todo Logo" />
 
         <Form onSubmit={handleSubmit}>
-          <Input name="text" type="text" placeholder="Criar to-do"></Input>
+          <Input
+            value={stateTodo.description}
+            name="text"
+            type="text"
+            placeholder="Criar to-do"
+          ></Input>
           <button type="submit">
             <img src={addButton} alt="botão adicionar todo" />
           </button>
@@ -70,10 +97,19 @@ function Todo() {
             <Card key={todo._id}>
               <p>{todo.description}</p>
               <span>
-                <button>
+                <button
+                  variant="primary"
+                  onClick={showModal.bind(this, todo._id)}
+                >
                   <img src={updateTodo} alt="update todo" />
                 </button>
-                <button onClick={() => handleDelete(todo._id)}>
+
+                <Modal
+                  todo={todo.description}
+                  show={state.show[todo._id]}
+                  handleClose={hideModal}
+                />
+                <button type="button" onClick={() => handleDelete(todo._id)}>
                   <img src={removeTodo} alt="remove todo" />
                 </button>
               </span>
